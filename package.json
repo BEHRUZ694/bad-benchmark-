@@ -1,63 +1,45 @@
 {
-  "name": "@jridgewell/sourcemap-codec",
-  "version": "1.5.5",
-  "description": "Encode/decode sourcemap mappings",
+  "name": "browserslist",
+  "version": "4.28.1",
+  "description": "Share target browsers between different front-end tools, like Autoprefixer, Stylelint and babel-env-preset",
   "keywords": [
-    "sourcemap",
-    "vlq"
+    "caniuse",
+    "browsers",
+    "target"
   ],
-  "main": "dist/sourcemap-codec.umd.js",
-  "module": "dist/sourcemap-codec.mjs",
-  "types": "types/sourcemap-codec.d.cts",
-  "files": [
-    "dist",
-    "src",
-    "types"
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/browserslist"
+    },
+    {
+      "type": "tidelift",
+      "url": "https://tidelift.com/funding/github/npm/browserslist"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/ai"
+    }
   ],
-  "exports": {
-    ".": [
-      {
-        "import": {
-          "types": "./types/sourcemap-codec.d.mts",
-          "default": "./dist/sourcemap-codec.mjs"
-        },
-        "default": {
-          "types": "./types/sourcemap-codec.d.cts",
-          "default": "./dist/sourcemap-codec.umd.js"
-        }
-      },
-      "./dist/sourcemap-codec.umd.js"
-    ],
-    "./package.json": "./package.json"
+  "author": "Andrey Sitnik <andrey@sitnik.ru>",
+  "license": "MIT",
+  "repository": "browserslist/browserslist",
+  "dependencies": {
+    "baseline-browser-mapping": "^2.9.0",
+    "caniuse-lite": "^1.0.30001759",
+    "electron-to-chromium": "^1.5.263",
+    "node-releases": "^2.0.27",
+    "update-browserslist-db": "^1.2.0"
   },
-  "scripts": {
-    "benchmark": "run-s build:code benchmark:*",
-    "benchmark:install": "cd benchmark && npm install",
-    "benchmark:only": "node --expose-gc benchmark/index.js",
-    "build": "run-s -n build:code build:types",
-    "build:code": "node ../../esbuild.mjs sourcemap-codec.ts",
-    "build:types": "run-s build:types:force build:types:emit build:types:mts",
-    "build:types:force": "rimraf tsconfig.build.tsbuildinfo",
-    "build:types:emit": "tsc --project tsconfig.build.json",
-    "build:types:mts": "node ../../mts-types.mjs",
-    "clean": "run-s -n clean:code clean:types",
-    "clean:code": "tsc --build --clean tsconfig.build.json",
-    "clean:types": "rimraf dist types",
-    "test": "run-s -n test:types test:only test:format",
-    "test:format": "prettier --check '{src,test}/**/*.ts'",
-    "test:only": "mocha",
-    "test:types": "eslint '{src,test}/**/*.ts'",
-    "lint": "run-s -n lint:types lint:format",
-    "lint:format": "npm run test:format -- --write",
-    "lint:types": "npm run test:types -- --fix",
-    "prepublishOnly": "npm run-s -n build test"
+  "engines": {
+    "node": "^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7"
   },
-  "homepage": "https://github.com/jridgewell/sourcemaps/tree/main/packages/sourcemap-codec",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jridgewell/sourcemaps.git",
-    "directory": "packages/sourcemap-codec"
+  "bin": {
+    "browserslist": "cli.js"
   },
-  "author": "Justin Ridgewell <justin@ridgewell.name>",
-  "license": "MIT"
+  "types": "./index.d.ts",
+  "browser": {
+    "./node.js": "./browser.js",
+    "path": false
+  }
 }
